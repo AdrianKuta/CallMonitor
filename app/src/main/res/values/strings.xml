@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Call Monitor</string>
+    <string name="rationale_title">We need permission to read your call logs.</string>
+    <string name="rationale_desc">This app relies on read access to your call logs. We require access to this permission to find your calls history in database. Call history will only be available to devices on the same Wifi network.</string>
 </resources>
