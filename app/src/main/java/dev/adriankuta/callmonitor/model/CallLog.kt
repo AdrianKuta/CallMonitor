@@ -1,14 +1,14 @@
-package dev.adriankuta.callmonitor.models
+package dev.adriankuta.callmonitor.model
 
 data class CallLog(
     /**
      * The date the call occured, in milliseconds since the epoch
      */
-    val beginning: Number,
+    val beginning: Long,
     /**
      * The duration of the call in seconds
      */
-    val duration: Number,
+    val duration: Int,
     /**
      * The phone number as the user entered it.
      */
@@ -20,5 +20,5 @@ data class CallLog(
     /**
      * How many times this number was queried by user.
      */
-    val timesQueried: Number
+    val timesQueried: Int
 )

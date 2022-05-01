@@ -1,4 +1,4 @@
-package dev.adriankuta.callmonitor.repositories
+package dev.adriankuta.callmonitor.repositories.calls
 
 import dev.adriankuta.callmonitor.repositories.entities.CallLogEntity
 

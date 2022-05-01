@@ -1,15 +1,11 @@
-package dev.adriankuta.callmonitor.repositories
+package dev.adriankuta.callmonitor.repositories.calls
 
 import android.content.Context
 import android.database.Cursor
-import android.database.DatabaseUtils
-import android.provider.CallLog
 import android.provider.CallLog.Calls
-import android.util.Log
 import dagger.hilt.android.qualifiers.ActivityContext
 import dev.adriankuta.callmonitor.repositories.entities.CallLogEntity
 import javax.inject.Inject
-import kotlin.reflect.KClass
 
 class CallRepositoryImpl @Inject constructor(
     @ActivityContext private val context: Context
@@ -27,7 +23,7 @@ class CallRepositoryImpl @Inject constructor(
 
     private fun mapToEntity(cursor: Cursor): CallLogEntity {
         return CallLogEntity(
-            date = cursor.getInt(cursor.getColumnIndexOrThrow(Calls.DATE)),
+            date = cursor.getLong(cursor.getColumnIndexOrThrow(Calls.DATE)),
             duration = cursor.getInt(cursor.getColumnIndexOrThrow(Calls.DURATION)),
             number = cursor.getString(cursor.getColumnIndexOrThrow(Calls.NUMBER)),
             name = cursor.getString(cursor.getColumnIndexOrThrow(Calls.CACHED_NAME))

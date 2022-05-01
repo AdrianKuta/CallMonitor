@@ -1,4 +1,4 @@
-package dev.adriankuta.callmonitor.activities
+package dev.adriankuta.callmonitor.app.ui.base
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -35,8 +35,11 @@ abstract class BaseActivity : AppCompatActivity() {
                 this,
                 requiredPermission
             ) == PackageManager.PERMISSION_GRANTED -> handlePermissionGranted()
-            shouldShowRequestPermissionRationale(requiredPermission) -> showRationaleDialog(getString(
-                R.string.rationale_title), getString(R.string.rationale_desc), requiredPermission)
+            shouldShowRequestPermissionRationale(requiredPermission) -> showRationaleDialog(
+                getString(
+                    R.string.rationale_title
+                ), getString(R.string.rationale_desc), requiredPermission
+            )
             else -> {
                 requestPermissionLauncher.launch(requiredPermission)
             }
@@ -48,7 +51,11 @@ abstract class BaseActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle(title)
             .setMessage(message)
-            .setPositiveButton(android.R.string.ok) { _, _ -> requestPermissionLauncher.launch(permission) }
+            .setPositiveButton(android.R.string.ok) { _, _ ->
+                requestPermissionLauncher.launch(
+                    permission
+                )
+            }
         builder.create().show()
     }
 

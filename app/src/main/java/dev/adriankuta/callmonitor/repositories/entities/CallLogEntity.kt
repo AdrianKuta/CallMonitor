@@ -4,11 +4,11 @@ data class CallLogEntity(
     /**
      * The date the call occured, in milliseconds since the epoch
      */
-    val date: Number,
+    val date: Long,
     /**
      * The duration of the call in seconds
      */
-    val duration: Number,
+    val duration: Int,
     /**
      * The phone number as the user entered it.
      */
