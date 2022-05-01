@@ -1,12 +1,7 @@
 package dev.adriankuta.callmonitor.activities
 
-import android.Manifest
-import android.content.pm.PackageManager
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import dagger.hilt.android.AndroidEntryPoint
 import dev.adriankuta.callmonitor.calls.CallLogManager
 import dev.adriankuta.callmonitor.databinding.ActivityMainBinding
@@ -33,7 +28,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onPermissionsGranted() {
-        val callHistory = callLogManager.getCallHistory()
-
+        val intent = Intent(this, ServerActivity::class.java)
+        startActivity(intent)
     }
 }
