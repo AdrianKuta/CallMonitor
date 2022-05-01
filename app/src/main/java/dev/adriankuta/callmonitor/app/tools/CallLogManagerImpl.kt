@@ -7,9 +7,9 @@ import javax.inject.Inject
 
 class CallLogManagerImpl @Inject constructor(
     private val callRepository: CallRepository
-): CallLogManager {
+) : CallLogManager {
+
     override fun getCallHistory(): List<CallLog> {
-        val callEntities = callRepository.getCallHistory()
         return callRepository.getCallHistory().map { it.toLogicModel(0) }
     }
 

@@ -6,9 +6,15 @@ import javax.inject.Inject
 class ResponseHandlerImpl @Inject constructor() : ResponseHandler {
 
     override fun sendResponse(exchange: HttpExchange, response: String) {
-        exchange.sendResponseHeaders(200, response.length.toLong())
-        exchange.responseBody.use {
-            it.write(response.toByteArray())
+        try {
+            val bs: ByteArray = response.toByteArray()
+            exchange.responseHeaders.set("Content-Type", "application/json")
+            exchange.sendResponseHeaders(200, bs.size.toLong())
+            exchange.responseBody.use {
+                it.write(bs)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 }
