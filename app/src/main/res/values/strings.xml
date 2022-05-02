@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">Call Monitor</string>
+    <string name="rationale_title">We need permission to read your call logs.</string>
+    <string name="rationale_desc">This app relies on read access to your call logs. We require access to this permission to find your calls history in database. Call history will only be available to devices on the same Wifi network.</string>
+    <string name="channel_name">Call monitor</string>
+    <string name="channel_description">Notification for running call monitor service in background.</string>
+    <string name="call_monitoring_notification_title">Call monitoring</string>
+    <string name="call_monitoring_notification_description">Call monitoring service is running in background.</string>
+    <string name="call_monitoring_notification_ticker">Call monitoring in background.</string>
+    <string name="btn_start_server">Start server</string>
+    <string name="btn_stop_server">Stop server</string>
+    <string name="server_address">Server address:</string>
+    <plurals name="call_duration">
+        <!--
+             As a developer, you should always supply "one" and "other"
+             strings. Your translators will know which strings are actually
+             needed for their language. Always include %d in "one" because
+             translators will need to use %d for languages where "one"
+             doesn't mean 1 (as explained above).
+          -->
+        <item quantity="one">Duration: %d second.</item>
+        <item quantity="other">Duration: %d seconds.</item>
+    </plurals>
 </resources>
