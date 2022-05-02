@@ -24,6 +24,8 @@ abstract class BaseActivity : AppCompatActivity() {
             listOf(Manifest.permission.READ_CALL_LOG, Manifest.permission.READ_PHONE_STATE)
         if (!hasPermissions(requiredPermission)) {
             multiplePermissionsLauncher.launch(requiredPermission.toTypedArray())
+        } else {
+            onPermissionsGranted()
         }
     }
 
