@@ -1,10 +1,12 @@
 package dev.adriankuta.callmonitor.model
 
+import java.util.*
+
 data class CallLog(
     /**
-     * The date the call occured, in milliseconds since the epoch
+     * The date the call occured.
      */
-    val beginning: Long,
+    val beginning: Date,
     /**
      * The duration of the call in seconds
      */

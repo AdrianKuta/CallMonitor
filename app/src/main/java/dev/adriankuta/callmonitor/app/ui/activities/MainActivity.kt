@@ -1,18 +1,17 @@
 package dev.adriankuta.callmonitor.app.ui.activities
 
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
-import dev.adriankuta.callmonitor.app.tools.CallLogManager
 import dev.adriankuta.callmonitor.app.ui.base.BaseActivity
+import dev.adriankuta.callmonitor.app.ui.viewmodels.MainViewModel
 import dev.adriankuta.callmonitor.databinding.ActivityMainBinding
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
 
-    @Inject
-    lateinit var callLogManager: CallLogManager
+    private val viewModel: MainViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,11 +24,22 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setupView() {
+        viewModel.ipAddress.observe(this, binding.editTextTextPersonName::setText)
+        binding.startService.setOnClickListener {
+            viewModel.startServer()
+        }
+        binding.stopService.setOnClickListener {
+            viewModel.stopServer()
+        }
+    }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.refreshCallLogs()
     }
 
     override fun onPermissionsGranted() {
-        val intent = Intent(this, ServerActivity::class.java)
-        startActivity(intent)
+        /*val intent = Intent(this, ServerActivity::class.java)
+        startActivity(intent)*/
     }
 }

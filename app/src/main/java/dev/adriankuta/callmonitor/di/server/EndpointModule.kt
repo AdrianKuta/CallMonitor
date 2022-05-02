@@ -5,6 +5,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.components.ServiceComponent
 import dagger.multibindings.IntoMap
 import dagger.multibindings.StringKey
 import dev.adriankuta.callmonitor.server.endpointHandlers.LogHandler
@@ -13,7 +14,7 @@ import dev.adriankuta.callmonitor.server.response.ResponseHandler
 import dev.adriankuta.callmonitor.server.response.ResponseHandlerImpl
 
 @Module
-@InstallIn(ActivityComponent::class)
+@InstallIn(ServiceComponent::class)
 abstract class EndpointModule {
 
     @Binds

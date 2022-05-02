@@ -3,12 +3,14 @@ package dev.adriankuta.callmonitor.repositories.calls
 import android.content.Context
 import android.database.Cursor
 import android.provider.CallLog.Calls
-import dagger.hilt.android.qualifiers.ActivityContext
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dev.adriankuta.callmonitor.repositories.entities.CallLogEntity
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class CallRepositoryImpl @Inject constructor(
-    @ActivityContext private val context: Context
+    @ApplicationContext private val context: Context
 ) : CallRepository {
 
     private val queryColumns = arrayOf(
@@ -30,9 +32,14 @@ class CallRepositoryImpl @Inject constructor(
         )
     }
 
-    override fun getCallHistory(): List<CallLogEntity> {
+    override fun getCallHistory(startTime: Long): List<CallLogEntity> {
+        if(startTime == -1L) {
+            return emptyList()
+        }
+
+        val filter = "${Calls.DATE}>$startTime"
         val cursor = context.contentResolver.query(
-            Calls.CONTENT_URI, queryColumns, null, null, sortOrder
+            Calls.CONTENT_URI, queryColumns, filter, null, sortOrder
         )
 
         cursor?.use {
