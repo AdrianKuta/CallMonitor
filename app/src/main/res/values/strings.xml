@@ -10,6 +10,8 @@
     <string name="btn_start_server">Start server</string>
     <string name="btn_stop_server">Stop server</string>
     <string name="server_address">Server address:</string>
+    <string name="snackbar_no_permissions">Not all permissions granted!</string>
+    <string name="settings">Settings</string>
     <plurals name="call_duration">
         <!--
              As a developer, you should always supply "one" and "other"
