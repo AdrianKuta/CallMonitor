@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
+import dev.adriankuta.callmonitor.app.ui.adapters.CallLogAdapter
 import dev.adriankuta.callmonitor.app.ui.base.BaseActivity
 import dev.adriankuta.callmonitor.app.ui.viewmodels.MainViewModel
 import dev.adriankuta.callmonitor.databinding.ActivityMainBinding
@@ -24,13 +25,16 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setupView() {
-        viewModel.ipAddress.observe(this, binding.editTextTextPersonName::setText)
+        val adapter = CallLogAdapter()
+        binding.callLogsRecyclerView.adapter = adapter
         binding.startService.setOnClickListener {
             viewModel.startServer()
         }
         binding.stopService.setOnClickListener {
             viewModel.stopServer()
         }
+        viewModel.ipAddress.observe(this, binding.editTextTextPersonName::setText)
+        viewModel.callLogs.observe(this, adapter::submitItems)
     }
 
     override fun onStart() {
