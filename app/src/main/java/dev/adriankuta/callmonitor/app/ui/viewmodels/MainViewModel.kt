@@ -38,6 +38,7 @@ class MainViewModel @Inject constructor(
 
     fun stopServer() {
         ipAddress.postValue("")
+        callLogs.postValue(emptyList())
         callLogManager.stopCallMonitoring()
     }
 

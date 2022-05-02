@@ -27,7 +27,7 @@ class MainActivity : BaseActivity() {
         val adapter = CallLogAdapter()
         binding.callLogsRecyclerView.adapter = adapter
         binding.startService.setOnClickListener {
-            viewModel.startServer()
+            askPermissions()
         }
         binding.stopService.setOnClickListener {
             viewModel.stopServer()
@@ -36,13 +36,13 @@ class MainActivity : BaseActivity() {
         viewModel.callLogs.observe(this, adapter::submitItems)
     }
 
+    override fun onPermissionsGranted() {
+        super.onPermissionsGranted()
+        viewModel.startServer()
+    }
+
     override fun onResume() {
         super.onResume()
         viewModel.refreshCallLogs()
-    }
-
-    override fun onPermissionsGranted() {
-        /*val intent = Intent(this, ServerActivity::class.java)
-        startActivity(intent)*/
     }
 }

@@ -42,7 +42,11 @@ class CallLogManagerImpl @Inject constructor(
 
     override suspend fun getCallHistory(): List<CallLog> {
         return withContext(Dispatchers.IO) {
-            callRepository.getCallHistory(getLatestStartDate()).map { it.toLogicModel(0) }
+
+            callRepository.getCallHistory(getLatestStartDate()).map {
+                val queryCount = preferences.getInt(it.number, 0)
+                it.toLogicModel(queryCount)
+            }
         }
     }
 

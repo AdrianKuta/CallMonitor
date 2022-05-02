@@ -3,70 +3,45 @@ package dev.adriankuta.callmonitor.app.ui.base
 import android.Manifest
 import android.content.pm.PackageManager
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import dagger.hilt.android.AndroidEntryPoint
-import dev.adriankuta.callmonitor.R
 
 @AndroidEntryPoint
 abstract class BaseActivity : AppCompatActivity() {
 
-    private val requestPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-            if (isGranted) {
-                handlePermissionGranted()
+    private val multiplePermissionsLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { isGranted ->
+            if (isGranted.containsValue(false)) {
+                onPermissionsDenied()
             } else {
-                handlePermissionDenied()
+                onPermissionsGranted()
             }
         }
 
-    override fun onStart() {
-        super.onStart()
-        setupPermissions()
-    }
-
-
-    private fun setupPermissions() {
-
-        val requiredPermission = Manifest.permission.READ_CALL_LOG
-        when {
-            ContextCompat.checkSelfPermission(
-                this,
-                requiredPermission
-            ) == PackageManager.PERMISSION_GRANTED -> handlePermissionGranted()
-            shouldShowRequestPermissionRationale(requiredPermission) -> showRationaleDialog(
-                getString(
-                    R.string.rationale_title
-                ), getString(R.string.rationale_desc), requiredPermission
-            )
-            else -> {
-                requestPermissionLauncher.launch(requiredPermission)
-            }
-
+    fun askPermissions() {
+        val requiredPermission =
+            listOf(Manifest.permission.READ_CALL_LOG, Manifest.permission.READ_PHONE_STATE)
+        if (!hasPermissions(requiredPermission)) {
+            multiplePermissionsLauncher.launch(requiredPermission.toTypedArray())
         }
     }
 
-    private fun showRationaleDialog(title: String, message: String, permission: String) {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle(title)
-            .setMessage(message)
-            .setPositiveButton(android.R.string.ok) { _, _ ->
-                requestPermissionLauncher.launch(
+
+    private fun hasPermissions(permissions: List<String>): Boolean {
+        permissions.forEach { permission ->
+            if (ContextCompat.checkSelfPermission(
+                    this,
                     permission
-                )
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                return false
             }
-        builder.create().show()
+        }
+        return true
     }
 
-    abstract fun onPermissionsGranted()
+    open fun onPermissionsGranted() = Unit
 
-
-    private fun handlePermissionGranted() {
-        onPermissionsGranted()
-    }
-
-    private fun handlePermissionDenied() {
-
-    }
+    open fun onPermissionsDenied() = Unit
 }
