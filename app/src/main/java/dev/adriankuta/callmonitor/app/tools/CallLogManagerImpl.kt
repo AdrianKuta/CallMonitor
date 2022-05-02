@@ -37,7 +37,7 @@ class CallLogManagerImpl @Inject constructor(
     override fun stopCallMonitoring() {
         val intent = Intent(context, ServerService::class.java)
         context.stopService(intent)
-        deleteStartDate()
+        clearData()
     }
 
     override suspend fun getCallHistory(): List<CallLog> {
@@ -59,10 +59,9 @@ class CallLogManagerImpl @Inject constructor(
         return preferences.getLong(context.getString(R.string.saved_start_call_monitoring), -1)
     }
 
-    private fun deleteStartDate() {
+    private fun clearData() {
         preferences.edit {
-            remove(context.getString(R.string.saved_start_call_monitoring))
-            apply()
+            clear()
         }
     }
 

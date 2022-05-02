@@ -1,7 +1,6 @@
 package dev.adriankuta.callmonitor.app.ui.activities
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import dev.adriankuta.callmonitor.app.ui.adapters.CallLogAdapter

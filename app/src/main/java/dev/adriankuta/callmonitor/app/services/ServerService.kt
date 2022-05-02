@@ -13,7 +13,7 @@ import dev.adriankuta.callmonitor.app.ui.base.MyApplication.Companion.NOTIFICATI
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ServerService: Service() {
+class ServerService : Service() {
 
     @Inject
     lateinit var httpServer: HttpServer

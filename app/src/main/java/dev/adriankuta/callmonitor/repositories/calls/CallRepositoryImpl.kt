@@ -33,7 +33,7 @@ class CallRepositoryImpl @Inject constructor(
     }
 
     override fun getCallHistory(startTime: Long): List<CallLogEntity> {
-        if(startTime == -1L) {
+        if (startTime == -1L) {
             return emptyList()
         }
 

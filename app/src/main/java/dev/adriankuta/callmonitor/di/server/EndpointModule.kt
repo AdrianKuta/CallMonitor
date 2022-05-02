@@ -4,12 +4,12 @@ import com.sun.net.httpserver.HttpHandler
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.components.ServiceComponent
 import dagger.multibindings.IntoMap
 import dagger.multibindings.StringKey
 import dev.adriankuta.callmonitor.server.endpointHandlers.LogHandler
 import dev.adriankuta.callmonitor.server.endpointHandlers.RootHandler
+import dev.adriankuta.callmonitor.server.endpointHandlers.StatusHandler
 import dev.adriankuta.callmonitor.server.response.ResponseHandler
 import dev.adriankuta.callmonitor.server.response.ResponseHandlerImpl
 
@@ -29,6 +29,11 @@ abstract class EndpointModule {
     @IntoMap
     @StringKey("/index")
     abstract fun provideIndexHandler(rootHandler: RootHandler): HttpHandler
+
+    @Binds
+    @IntoMap
+    @StringKey("/status")
+    abstract fun provideStatusHandler(statusHandler: StatusHandler): HttpHandler
 
     @Binds
     @IntoMap

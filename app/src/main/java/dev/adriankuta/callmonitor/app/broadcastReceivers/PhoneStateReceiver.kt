@@ -20,7 +20,13 @@ class PhoneStateReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         try {
             val ongoingNumber = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER)
-            ongoingNumber?.let { saveOngoingCall(context, it) } ?: clearOngoingCall(context)
+            val state = intent.getStringExtra(TelephonyManager.EXTRA_STATE)
+
+            if (state != TelephonyManager.EXTRA_STATE_IDLE && ongoingNumber != null) {
+                saveOngoingCall(context, ongoingNumber)
+            } else {
+                clearOngoingCall(context)
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
