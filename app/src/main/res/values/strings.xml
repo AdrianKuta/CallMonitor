@@ -10,8 +10,6 @@
     <string name="btn_start_server">Start server</string>
     <string name="btn_stop_server">Stop server</string>
     <string name="server_address">Server address:</string>
-    <string name="preference_file_key">SharedPreferences</string>
-    <string name="saved_start_call_monitoring">Start call monitoring</string>
     <plurals name="call_duration">
         <!--
              As a developer, you should always supply "one" and "other"

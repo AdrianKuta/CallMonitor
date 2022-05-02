@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
+import androidx.core.content.edit
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dev.adriankuta.callmonitor.R
 import dev.adriankuta.callmonitor.app.services.ServerService
@@ -47,7 +48,7 @@ class CallLogManagerImpl @Inject constructor(
 
     private fun saveStartDate() {
         val startDate = Date().time
-        with(preferences.edit()) {
+        preferences.edit {
             putLong(context.getString(R.string.saved_start_call_monitoring), startDate)
             apply()
         }
@@ -59,7 +60,7 @@ class CallLogManagerImpl @Inject constructor(
     }
 
     private fun deleteStartDate() {
-        with(preferences.edit()) {
+        preferences.edit {
             remove(context.getString(R.string.saved_start_call_monitoring))
             apply()
         }

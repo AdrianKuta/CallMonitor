@@ -37,8 +37,8 @@ class MainActivity : BaseActivity() {
         viewModel.callLogs.observe(this, adapter::submitItems)
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
         viewModel.refreshCallLogs()
     }
 

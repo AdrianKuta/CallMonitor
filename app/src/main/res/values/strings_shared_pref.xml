@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="preference_file_key">SharedPreferences</string>
+    <string name="saved_start_call_monitoring">Start call monitoring</string>
+    <string name="saved_ongoing_call">Ongoing call number</string>
+</resources>
